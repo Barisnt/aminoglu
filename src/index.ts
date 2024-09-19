@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import "dotenv/config"
 
@@ -6,10 +7,13 @@ import { readdirSync } from "fs"
 import type ApplicationCommand from "./templates/ApplicationCommand.js"
 import type Event from "./templates/Event.js"
 import type MessageCommand from "./templates/MessageCommand.js"
-import deployGlobalCommands from "./deployGlobalCommands.js"
-const { TOKEN } = process.env
+// import deployGlobalCommands from "./deployGlobalCommands.js"
+import { Player } from "discord-player"
+import { YoutubeiExtractor } from "discord-player-youtubei"
+import {} from "play-dl"
+const { TOKEN, COOKIE } = process.env
 
-await deployGlobalCommands()
+// await deployGlobalCommands()
 
 // Discord client object
 global.client = Object.assign(
@@ -18,7 +22,8 @@ global.client = Object.assign(
             GatewayIntentBits.Guilds,
             GatewayIntentBits.GuildMessages,
             GatewayIntentBits.DirectMessages,
-            GatewayIntentBits.MessageContent
+            GatewayIntentBits.MessageContent,
+            GatewayIntentBits.GuildVoiceStates
         ],
         partials: [Partials.Channel]
     }),
@@ -27,7 +32,16 @@ global.client = Object.assign(
         msgCommands: new Collection<string, MessageCommand>()
     }
 )
+const player = new Player(global.client)
 
+await player.extractors.register(YoutubeiExtractor, {
+    authentication: COOKIE
+})
+
+player.events.on("playerStart", (queue, track) => {
+    // we will later define queue.metadata object while creating the queue
+    queue.metadata.channel.send(`Started playing **${track.cleanTitle}**!`)
+})
 // Set each command in the commands folder as a command in the client.commands collection
 const commandFiles: string[] = readdirSync("./commands").filter(
     (file) => file.endsWith(".js") || file.endsWith(".ts")
