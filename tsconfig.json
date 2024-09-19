@@ -4,6 +4,7 @@
         "resolveJsonModule": true,
         "outDir": "./dist",
         "module": "ESNext",
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "moduleResolution": "Node"
     }
 }
