@@ -1,5 +1,5 @@
-import type { Message } from 'discord.js'
-import BaseCommand from './BaseCommand.js'
+import type { Message } from "discord.js"
+import BaseCommand from "./BaseCommand.js"
 
 /*
  * Represents a Message Command

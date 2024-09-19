@@ -1,7 +1,7 @@
 /* eslint-disable no-var */
-import { Client, Collection } from 'discord.js'
-import ApplicationCommand from '../templates/ApplicationCommand'
-import MessageCommand from '../templates/MessageCommand'
+import { Client, Collection } from "discord.js"
+import ApplicationCommand from "../templates/ApplicationCommand"
+import MessageCommand from "../templates/MessageCommand"
 
 interface DiscordClient extends Client {
     commands: Collection<string, ApplicationCommand>

@@ -1,7 +1,7 @@
 import type {
     ChatInputCommandInteraction,
     AutocompleteInteraction
-} from 'discord.js'
+} from "discord.js"
 
 /**
  * Represents a SubCommand

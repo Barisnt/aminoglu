@@ -5,8 +5,8 @@ import type {
     ContextMenuCommandBuilder,
     SlashCommandBuilder,
     SlashCommandSubcommandsOnlyBuilder
-} from 'discord.js'
-import type SubCommand from './SubCommand.js'
+} from "discord.js"
+import type SubCommand from "./SubCommand.js"
 
 /**
  * Represents an Application Command
@@ -58,7 +58,7 @@ export default class ApplicationCommand {
                         const command = (
                             await import(
                                 `../subCommands/${this.data.name}/${
-                                    subCommandGroup ? `${subCommandGroup}/` : ''
+                                    subCommandGroup ? `${subCommandGroup}/` : ""
                                 }${commandName}.js`
                             )
                         ).default as SubCommand
@@ -67,7 +67,7 @@ export default class ApplicationCommand {
                         console.error(error)
                         await interaction.reply({
                             content:
-                                'An error occured when attempting to execute that command!',
+                                "An error occured when attempting to execute that command!",
                             ephemeral: true
                         })
                     }
@@ -85,7 +85,7 @@ export default class ApplicationCommand {
                         const subCommand = (
                             await import(
                                 `../subCommands/${this.data.name}/${
-                                    subCommandGroup ? `${subCommandGroup}/` : ''
+                                    subCommandGroup ? `${subCommandGroup}/` : ""
                                 }${subCommandName}.js`
                             )
                         ).default as SubCommand
@@ -96,8 +96,8 @@ export default class ApplicationCommand {
                         console.error(error)
                         await interaction.respond([
                             {
-                                name: 'Failed to autocomplete',
-                                value: 'error'
+                                name: "Failed to autocomplete",
+                                value: "error"
                             }
                         ])
                     }
@@ -108,7 +108,7 @@ export default class ApplicationCommand {
         } else if (options.autocomplete) {
             this.autocomplete = options.autocomplete
         } else {
-            throw new Error('No execute function provided')
+            throw new Error("No execute function provided")
         }
 
         this.data = options.data

@@ -1,10 +1,10 @@
-import MessageCommand from '../templates/MessageCommand.js'
-import { default as config } from '../config.json' assert { type: 'json' }
+import MessageCommand from "../templates/MessageCommand.js"
+import { default as config } from "../config.json" assert { type: "json" }
 const { OWNER_ID } = process.env
 
 export default new MessageCommand({
-    name: 'undeploy',
-    description: 'Undeploys the slash commands',
+    name: "undeploy",
+    description: "Undeploys the slash commands",
     async execute(message, args): Promise<void> {
         if (message.author.id !== OWNER_ID) return
 
@@ -15,20 +15,20 @@ export default new MessageCommand({
             return
         }
 
-        if (args[0].toLowerCase() === 'global') {
+        if (args[0].toLowerCase() === "global") {
             // global undeployment
 
             // undeploy the commands
             await client.application?.commands.set([])
 
-            await message.reply({ content: 'Undeploying!' })
-        } else if (args[0].toLowerCase() === 'guild') {
+            await message.reply({ content: "Undeploying!" })
+        } else if (args[0].toLowerCase() === "guild") {
             // guild deployment
 
             // undeploy the commands
             await message.guild?.commands.set([])
 
-            await message.reply({ content: 'Undeploying!' })
+            await message.reply({ content: "Undeploying!" })
         }
     }
 })

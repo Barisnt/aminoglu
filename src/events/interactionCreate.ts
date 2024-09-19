@@ -1,6 +1,6 @@
-import { BaseInteraction, Events } from 'discord.js'
-import type ApplicationCommand from '../templates/ApplicationCommand.js'
-import Event from '../templates/Event.js'
+import { BaseInteraction, Events } from "discord.js"
+import type ApplicationCommand from "../templates/ApplicationCommand.js"
+import Event from "../templates/Event.js"
 
 export default new Event({
     name: Events.InteractionCreate,
@@ -18,7 +18,7 @@ export default new Event({
                     )
                     await interaction.reply({
                         content:
-                            'There was an error while executing this command!',
+                            "There was an error while executing this command!",
                         ephemeral: true
                     })
                     return
@@ -28,7 +28,7 @@ export default new Event({
             } catch (error) {
                 console.error(error)
                 await interaction.reply({
-                    content: 'There was an error while executing this command!',
+                    content: "There was an error while executing this command!",
                     ephemeral: true
                 })
             }
@@ -46,8 +46,8 @@ export default new Event({
                     )
                     await interaction.respond([
                         {
-                            name: 'Failed to autocomplete',
-                            value: 'error'
+                            name: "Failed to autocomplete",
+                            value: "error"
                         }
                     ])
                     return

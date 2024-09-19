@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import 'dotenv/config'
+import "dotenv/config"
 
-import { Client, GatewayIntentBits, Collection, Partials } from 'discord.js'
-import { readdirSync } from 'fs'
-import type ApplicationCommand from './templates/ApplicationCommand.js'
-import type Event from './templates/Event.js'
-import type MessageCommand from './templates/MessageCommand.js'
-import deployGlobalCommands from './deployGlobalCommands.js'
+import { Client, GatewayIntentBits, Collection, Partials } from "discord.js"
+import { readdirSync } from "fs"
+import type ApplicationCommand from "./templates/ApplicationCommand.js"
+import type Event from "./templates/Event.js"
+import type MessageCommand from "./templates/MessageCommand.js"
+import deployGlobalCommands from "./deployGlobalCommands.js"
 const { TOKEN } = process.env
 
 await deployGlobalCommands()
@@ -29,8 +29,8 @@ global.client = Object.assign(
 )
 
 // Set each command in the commands folder as a command in the client.commands collection
-const commandFiles: string[] = readdirSync('./commands').filter(
-    (file) => file.endsWith('.js') || file.endsWith('.ts')
+const commandFiles: string[] = readdirSync("./commands").filter(
+    (file) => file.endsWith(".js") || file.endsWith(".ts")
 )
 for (const file of commandFiles) {
     const command: ApplicationCommand = (await import(`./commands/${file}`))
@@ -38,8 +38,8 @@ for (const file of commandFiles) {
     client.commands.set(command.data.name, command)
 }
 
-const msgCommandFiles: string[] = readdirSync('./messageCommands').filter(
-    (file) => file.endsWith('.js') || file.endsWith('.ts')
+const msgCommandFiles: string[] = readdirSync("./messageCommands").filter(
+    (file) => file.endsWith(".js") || file.endsWith(".ts")
 )
 for (const file of msgCommandFiles) {
     const command: MessageCommand = (await import(`./messageCommands/${file}`))
@@ -48,8 +48,8 @@ for (const file of msgCommandFiles) {
 }
 
 // Event handling
-const eventFiles: string[] = readdirSync('./events').filter(
-    (file) => file.endsWith('.js') || file.endsWith('.ts')
+const eventFiles: string[] = readdirSync("./events").filter(
+    (file) => file.endsWith(".js") || file.endsWith(".ts")
 )
 
 for (const file of eventFiles) {
